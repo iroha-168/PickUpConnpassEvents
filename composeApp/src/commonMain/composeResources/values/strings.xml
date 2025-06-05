@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">PickUpConnpassEvents</string>
+    <string name="tab_name_events">Events</string>
+    <string name="tab_name_favorites">Favorites</string>
+    <string name="event_item_start">"start: "</string>
+</resources>
