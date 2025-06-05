@@ -12,10 +12,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.example.project.ui.EventScreen
+import org.example.project.ui.FavoritesScreen
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -55,7 +58,12 @@ fun App() {
                                     route = destination.route
                                 )
                             },
-                            text = { Text(stringResource(destination.labelRes)) }
+                            text = {
+                                Text(
+                                    text = stringResource(destination.labelRes),
+                                    fontSize = 16.sp,
+                                )
+                            }
                         )
                     }
                 }
@@ -81,30 +89,10 @@ fun AppNavHost(
         Destination.entries.forEach { destination ->
             composable(destination.route) {
                 when (destination) {
-                    Destination.Events -> EventsScreen(modifier)
+                    Destination.Events -> EventScreen(modifier)
                     Destination.Favorites -> FavoritesScreen(modifier)
                 }
             }
         }
     }
 }
-
-@Composable
-fun EventsScreen(
-    modifier: Modifier = Modifier
-) {
-    Column(modifier = modifier.fillMaxSize()) {
-        Text("Events Screenだよ")
-    }
-}
-
-@Composable
-fun FavoritesScreen(
-    modifier: Modifier = Modifier
-) {
-    Column(modifier = modifier.fillMaxSize()) {
-        Text("Favorites Screenだよ")
-    }
-}
-
-
