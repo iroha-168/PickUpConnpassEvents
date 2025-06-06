@@ -1,6 +1,5 @@
-package org.example.project
+package org.example.project.di
 
-import org.example.project.di.appModule
 import org.koin.core.context.startKoin
 
 fun initKoin() {

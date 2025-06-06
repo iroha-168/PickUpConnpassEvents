@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -52,6 +51,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.core)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kermit)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
