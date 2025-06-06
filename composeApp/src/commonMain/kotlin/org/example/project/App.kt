@@ -18,7 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.example.project.ui.EventScreen
-import org.example.project.ui.FavoritesScreen
+import org.example.project.ui.FavoriteScreen
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -90,7 +90,7 @@ fun AppNavHost(
             composable(destination.route) {
                 when (destination) {
                     Destination.Events -> EventScreen(modifier)
-                    Destination.Favorites -> FavoritesScreen(modifier)
+                    Destination.Favorites -> FavoriteScreen(modifier)
                 }
             }
         }
