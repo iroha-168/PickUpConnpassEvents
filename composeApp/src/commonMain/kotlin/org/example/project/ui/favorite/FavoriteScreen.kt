@@ -1,4 +1,4 @@
-package org.example.project.ui
+package org.example.project.ui.favorite
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize

@@ -17,22 +17,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import org.example.project.ui.EventScreen
-import org.example.project.ui.FavoriteScreen
-import org.jetbrains.compose.resources.StringResource
+import org.example.project.ui.event.EventScreen
+import org.example.project.ui.event.EventViewModel
+import org.example.project.ui.favorite.FavoriteScreen
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import pickupconnpassevents.composeapp.generated.resources.Res
-import pickupconnpassevents.composeapp.generated.resources.tab_name_events
-import pickupconnpassevents.composeapp.generated.resources.tab_name_favorites
-
-enum class Destination(
-    val route: String,
-    val labelRes: StringResource
-) {
-    Events("events", Res.string.tab_name_events),
-    Favorites("favorites", Res.string.tab_name_favorites);
-}
+import org.koin.compose.getKoin
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -89,7 +79,13 @@ fun AppNavHost(
         Destination.entries.forEach { destination ->
             composable(destination.route) {
                 when (destination) {
-                    Destination.Events -> EventScreen(modifier)
+                    Destination.Events -> {
+                        val eventViewModel: EventViewModel = getKoin().get()
+                        EventScreen(
+                            modifier = modifier,
+                            viewModel = eventViewModel,
+                        )
+                    }
                     Destination.Favorites -> FavoriteScreen(modifier)
                 }
             }
