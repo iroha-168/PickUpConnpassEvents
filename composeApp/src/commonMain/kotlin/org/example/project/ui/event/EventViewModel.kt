@@ -15,13 +15,19 @@ class EventViewModel(
     val uiState: StateFlow<EventUiState> = _uiState
 
     init {
+        refresh()
+    }
+
+    fun refresh() {
         viewModelScope.launch {
+            _uiState.update { it.copy(isRefreshing = true) }
             val hoge = eventRepository.hoge()
-            _uiState.update { it.copy(hoge = hoge) }
+            _uiState.update { it.copy(hoge = hoge, isRefreshing = false) }
         }
     }
 }
 
 data class EventUiState(
-    val hoge: String? = null
+    val hoge: String? = null,
+    val isRefreshing: Boolean = false,
 )
