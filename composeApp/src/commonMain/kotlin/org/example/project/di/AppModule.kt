@@ -6,7 +6,16 @@ import org.example.project.ui.event.EventViewModel
 import org.koin.dsl.module
 
 val appModule = module {
-    single { EventRepository(get()) }
+    single { EventRepository(get(), get()) }
     single { EventViewModel(get()) }
     single { ConnpassApiClient() }
+
+    // TODO: データベースのインスタンス化をする
+//    single<EventDatabase> {
+//    }
+
+//    single<EventDao> {
+//        val database = get<EventDatabase>()
+//        database.getDao()
+//    }
 }

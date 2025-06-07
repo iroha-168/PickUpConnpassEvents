@@ -46,12 +46,23 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.androidx.compose.foundation)
             implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.datetime)
+            // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            // Ktor
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.core)
-            implementation(libs.kotlinx.coroutines.core)
+            // Kermit
             implementation(libs.kermit)
+            // Room and SQLite
+            implementation(libs.androidx.room.gradle.plugin)
+            implementation(libs.androidx.room.compiler)
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite)
+            implementation(libs.androidx.sqlite.bundled)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -92,4 +103,9 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
 }
+
+configurations.all {
+    exclude(group = "com.intellij", module = "annotations")
+}
+
 
