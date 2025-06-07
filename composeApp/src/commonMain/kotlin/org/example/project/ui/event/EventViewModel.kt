@@ -38,7 +38,7 @@ val mockEvents = listOf(
         id = 1L,
         title = "Kotlin Multiplatform Meetup",
         url = "https://example.com/kmp-meetup",
-        startedAt = DateTime(Instant.parse("2024-07-01T18:30:00Z")),
+//        startedAt = DateTime(Instant.parse("2024-07-01T18:30:00Z")),
         place = "Tokyo, Japan",
         isFavorite = false
     ),
@@ -46,7 +46,7 @@ val mockEvents = listOf(
         id = 2L,
         title = "Android Jetpack Compose Workshop",
         url = "https://example.com/compose-workshop",
-        startedAt = DateTime(Instant.parse("2024-07-10T13:00:00Z")),
+//        startedAt = DateTime(Instant.parse("2024-07-10T13:00:00Z")),
         place = "Osaka, Japan",
         isFavorite = true
     ),
@@ -54,7 +54,7 @@ val mockEvents = listOf(
         id = 3L,
         title = "iOS SwiftUI勉強会",
         url = "https://example.com/swiftui",
-        startedAt = null,
+//        startedAt = null,
         place = null,
         isFavorite = false
     )

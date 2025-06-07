@@ -1,9 +1,8 @@
-package org.example.project
+package org.example.project.data.db
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
-import org.example.project.data.db.EventDatabase
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
@@ -25,4 +24,8 @@ private fun documentDirectory(): String {
         error = null,
     )
     return requireNotNull(documentDirectory?.path)
+}
+
+actual fun getRoomDatabaseBuilder(): RoomDatabase.Builder<EventDatabase> {
+    return getDatabaseBuilder()
 }
