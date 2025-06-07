@@ -6,13 +6,15 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.ksp)
+    alias (libs.plugins.androidx.room.gradle.plugin)
 }
 
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
     
@@ -24,6 +26,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            linkerOpts.add("-lsqlite3")
         }
     }
     
@@ -34,6 +37,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.koin.android)
+            implementation(libs.koin.core)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -46,12 +51,21 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.androidx.compose.foundation)
             implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.datetime)
+            // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            // Ktor
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.core)
-            implementation(libs.kotlinx.coroutines.core)
+            // Kermit
             implementation(libs.kermit)
+            // Room and SQLite
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite)
+            implementation(libs.androidx.sqlite.bundled)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -91,5 +105,17 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    add("kspCommonMainMetadata", libs.androidx.room.compiler)
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosX64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
 }
 
+configurations.all {
+    exclude(group = "com.intellij", module = "annotations")
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
+}
