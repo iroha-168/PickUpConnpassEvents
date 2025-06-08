@@ -1,0 +1,43 @@
+package org.example.project.ui.event.section
+
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import org.example.project.ui.event.component.EventItem
+import org.example.project.ui.event.EventUiState
+
+@Composable
+fun EventList(
+    modifier: Modifier = Modifier,
+    onFavoriteButtonClick: (Long) -> Unit = {},
+    uiState: EventUiState,
+) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize()
+    ) {
+//                item {
+//                    Text(
+//                        text = "Koin & Ktorのテスト： ${uiState.hoge}",
+//                    )
+//                    Spacer(modifier = Modifier.padding(bottom = 8.dp))
+//                }
+
+        items(uiState.events!!) {
+            val event = it.event
+            EventItem(
+                id = event.id,
+                title = event.title,
+                startedAt = it.formattedDate,
+                place = event.place,
+                isFavorite = event.isFavorite,
+                onFavoriteButtonClick = onFavoriteButtonClick
+            )
+            Spacer(modifier = Modifier.padding(bottom = 8.dp))
+        }
+    }
+}

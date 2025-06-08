@@ -1,4 +1,4 @@
-package org.example.project.ui.component
+package org.example.project.ui.event.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -39,7 +39,7 @@ fun EventItem(
     title: String,
     startedAt: String?,
     place: String?,
-    onFavoriteButtonClick: (Long) -> Unit = {},
+    onFavoriteButtonClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -87,7 +87,6 @@ private fun FavoriteButton(
             Res.drawable.favorite_filled
         } else {
             Res.drawable.favorite_outline
-
         }
 
         Icon(

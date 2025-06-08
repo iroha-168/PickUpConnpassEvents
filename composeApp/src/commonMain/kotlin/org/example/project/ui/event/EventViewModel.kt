@@ -52,7 +52,7 @@ class EventViewModel(
 val mockEvents = listOf(
     EventDto(
         id = 1L,
-        title = "Kotlin Multiplatform Meetup",
+        title = "Android Kotlin Multiplatform Meetup",
         startedAt = DateTime(LocalDateTime.parse("2025-06-08T14:30:00")),
         place = "Tokyo",
         isFavorite = false
@@ -60,7 +60,7 @@ val mockEvents = listOf(
     EventDto(
         id = 2L,
         title = "Android Jetpack Compose Workshop",
-        startedAt = DateTime(LocalDateTime.parse("2025-06-08T14:30:00")),
+        startedAt = DateTime(LocalDateTime.parse("2025-06-09T14:30:00")),
         place = "Osaka",
         isFavorite = true
     ),
@@ -68,6 +68,13 @@ val mockEvents = listOf(
         id = 3L,
         title = "iOS SwiftUI勉強会",
         startedAt = null,
+        place = null,
+        isFavorite = false
+    ),
+    EventDto(
+        id = 3L,
+        title = "iOSDC 2025 After Party",
+        startedAt = DateTime(LocalDateTime.parse("2025-10-01T14:30:00")),
         place = null,
         isFavorite = false
     )
