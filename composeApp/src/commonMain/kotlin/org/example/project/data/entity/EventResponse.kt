@@ -1,7 +1,6 @@
 package org.example.project.data.entity
 
-import kotlinx.datetime.Instant
-import kotlinx.serialization.Contextual
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
@@ -20,31 +19,28 @@ data class EventResponse (
 
 @Serializable
 data class Event(
-    @SerialName("id")
     val id: Long,
     val title: String,
-    @SerialName("url")
-    val url: String,
     @SerialName("started_at")
 //    @Contextual
     val startedAt: DateTime?,
     val place: String?,
 )
 
-@Serializable(with = InstantSerializer::class)
-data class DateTime(val date: Instant)
+@Serializable(with = LocalDateTimeSerializer::class)
+data class DateTime(val date: LocalDateTime)
 
 @OptIn(ExperimentalSerializationApi::class)
-@Serializer(forClass = Instant::class)
-object InstantSerializer : KSerializer<Instant> {
+@Serializer(forClass = LocalDateTime::class)
+object LocalDateTimeSerializer : KSerializer<LocalDateTime> {
     override val descriptor: SerialDescriptor =
-        PrimitiveSerialDescriptor("Instant", PrimitiveKind.STRING)
+        PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: Instant) {
+    override fun serialize(encoder: Encoder, value: LocalDateTime) {
         encoder.encodeString(value.toString())
     }
 
-    override fun deserialize(decoder: Decoder): Instant {
-        return Instant.parse(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): LocalDateTime {
+        return LocalDateTime.parse(decoder.decodeString())
     }
 }

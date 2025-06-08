@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "92299310e4cc19335640f71735924365",
+    "identityHash": "155e7b3d6ac41778130af5749bdf4cc0",
     "entities": [
       {
         "tableName": "EventDto",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `url` TEXT NOT NULL, `place` TEXT, `isFavorite` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `startedAt` TEXT, `place` TEXT, `isFavorite` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,10 +21,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "url",
-            "columnName": "url",
-            "affinity": "TEXT",
-            "notNull": true
+            "fieldPath": "startedAt",
+            "columnName": "startedAt",
+            "affinity": "TEXT"
           },
           {
             "fieldPath": "place",
@@ -48,7 +47,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '92299310e4cc19335640f71735924365')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '155e7b3d6ac41778130af5749bdf4cc0')"
     ]
   }
 }

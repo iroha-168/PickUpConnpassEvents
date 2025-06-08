@@ -10,17 +10,19 @@ class EventRepository(
     private val connpassApiClient: ConnpassApiClient,
     private val eventDao: EventDao,
 ) {
+    val events = eventDao.getAll()
+
     suspend fun hoge(): String {
         delay(timeMillis = 1000)
         val result = connpassApiClient.getSample()
-        Logger.d { "HOGE: result is $result" }
-
-//        return "hoge!"
         return result
     }
 
-    suspend fun insertEvents(events: List<EventDto>) {
-        eventDao.eventInsert(events)
-        Logger.d { "HOGE: insertEventsが実行されました" }
+    suspend fun upsertEvents(events: List<EventDto>) {
+        events.forEach { event ->
+            if (eventDao.insertEvent(event) == -1L) {
+                eventDao.updateEvent(event)
+            }
+        }
     }
 }

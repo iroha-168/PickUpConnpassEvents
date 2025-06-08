@@ -4,6 +4,7 @@ import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
+import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +14,7 @@ private val MIGRATIONS: Array<Migration> = arrayOf()
 
 @Database(entities = [EventDto::class], version = 1)
 @ConstructedBy(EventDatabaseConstructor::class)
+@TypeConverters(Converters::class)
 abstract class EventDatabase : RoomDatabase() {
     abstract fun getDao(): EventDao
 }

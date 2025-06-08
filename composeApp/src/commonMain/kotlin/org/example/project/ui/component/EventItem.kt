@@ -31,17 +31,13 @@ import pickupconnpassevents.composeapp.generated.resources.favorite_outline
 
 @Composable
 fun EventItem(
-    year: String = "2025",
-    month: String = "01",
-    date: String = "01",
-    day: String = "Mon",
-    eventTitle: String = "Android Event",
-    isFavorite: Boolean = false,
-    startTime: String = "10:00",
-    location: String = "Tokyo",
-    eventId: Int = 0,
+    id: Long,
+    isFavorite: Boolean,
+    title: String,
+    startedAt: String?,
+    place: String?,
     onFavoriteButtonClick: (Long) -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier.run {
@@ -52,20 +48,16 @@ fun EventItem(
         }
     ) {
         EventInfoArea(
-            year = year,
-            month = month,
-            day = day,
-            date = date,
-            startTime = startTime,
-            eventTitle = eventTitle,
-            location = location,
+            startedAt = startedAt,
+            title = title,
+            place = place,
         )
 
         Spacer(modifier.weight(1f))
 
         FavoriteButton(
             isFavorite = isFavorite,
-            onClick = { onFavoriteButtonClick(eventId.toLong()) },
+            onClick = { onFavoriteButtonClick(id.toLong()) },
         )
     }
 }
@@ -76,6 +68,7 @@ private fun FavoriteButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // todo: 渡されてきたisFavoriteを入れる
     var isTapped by remember { mutableStateOf(false) }
 
     IconButton(
@@ -101,25 +94,15 @@ private fun FavoriteButton(
 
 @Composable
 private fun EventInfoArea(
-    year: String,
-    month: String,
-    date: String,
-    day: String,
-    startTime: String,
-    eventTitle: String,
-    location: String,
+    startedAt: String?,
+    title: String,
+    place: String?,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        EventTitle(eventTitle = eventTitle)
-        EventLocation(location = location)
-        EventStartDate(
-            year = year,
-            month = month,
-            day = day,
-            date = date,
-            startTime = startTime
-        )
+        EventTitle(eventTitle = title)
+        EventLocation(location = place)
+        EventStartDate(startedAt = startedAt)
     }
 }
 
@@ -128,6 +111,7 @@ private fun EventTitle(
     eventTitle: String,
     modifier: Modifier = Modifier,
 ) {
+    // todo: 長すぎるタイトルを省略する
     Text(
         modifier = modifier,
         text = eventTitle,
@@ -138,7 +122,7 @@ private fun EventTitle(
 
 @Composable
 private fun EventLocation(
-    location: String,
+    location: String?,
     modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier) {
@@ -147,7 +131,7 @@ private fun EventLocation(
         )
         Text(
             modifier = modifier,
-            text = location,
+            text = location ?: "未定", //todo: 文字列リソースにする
             fontSize = 16.sp,
         )
     }
@@ -155,11 +139,7 @@ private fun EventLocation(
 
 @Composable
 private fun EventStartDate(
-    year: String,
-    month: String,
-    day: String,
-    date: String,
-    startTime: String,
+    startedAt: String?,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
@@ -167,7 +147,7 @@ private fun EventStartDate(
             text = stringResource(Res.string.event_item_start),
         )
         Text(
-            text = "$year/$month/$date ($day) $startTime",
+            text = startedAt ?: "未定",
             fontSize = 16.sp,
         )
     }

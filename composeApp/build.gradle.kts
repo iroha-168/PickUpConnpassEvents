@@ -66,6 +66,8 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.sqlite)
             implementation(libs.androidx.sqlite.bundled)
+            // Kotlinx DateTime
+            implementation(libs.kotlinx.datetime.v062)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

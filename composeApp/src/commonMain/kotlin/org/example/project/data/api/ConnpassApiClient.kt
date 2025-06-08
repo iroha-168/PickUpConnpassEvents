@@ -1,5 +1,6 @@
 package org.example.project.data.api
 
+import co.touchlab.kermit.Logger
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
