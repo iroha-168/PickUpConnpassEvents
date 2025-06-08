@@ -22,7 +22,6 @@ data class Event(
     val id: Long,
     val title: String,
     @SerialName("started_at")
-//    @Contextual
     val startedAt: DateTime?,
     val place: String?,
 )
