@@ -4,4 +4,5 @@
     <string name="tab_name_favorites">Favorites</string>
     <string name="event_item_location">location: </string>
     <string name="event_item_start">start: </string>
+    <string name="event_item_tbd">TBD</string>
 </resources>

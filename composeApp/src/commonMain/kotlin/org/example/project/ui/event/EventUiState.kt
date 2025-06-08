@@ -17,21 +17,21 @@ data class EventItemUiState(
 
     fun LocalDateTime.formatJapanese(): String {
         val dayOfWeek = when (this.dayOfWeek) {
-            DayOfWeek.MONDAY -> "(月)"
-            DayOfWeek.TUESDAY -> "(火)"
-            DayOfWeek.WEDNESDAY -> "(水)"
-            DayOfWeek.THURSDAY -> "(木)"
-            DayOfWeek.FRIDAY -> "(金)"
-            DayOfWeek.SATURDAY -> "(土)"
-            DayOfWeek.SUNDAY -> "(日)"
+            DayOfWeek.MONDAY -> "(MON)"
+            DayOfWeek.TUESDAY -> "(TUE)"
+            DayOfWeek.WEDNESDAY -> "(WED)"
+            DayOfWeek.THURSDAY -> "(THU)"
+            DayOfWeek.FRIDAY -> "(FRI)"
+            DayOfWeek.SATURDAY -> "(SAT)"
+            DayOfWeek.SUNDAY -> "(SUN)"
             else -> {}
         }
-        val year = "${this.year}" + "年"
-        val monthNumber = "${this.monthNumber}" + "月"
-        val dayOfMonth = "${this.dayOfMonth}" + "日"
+        val year = "${this.year}"
+        val monthNumber = "/${this.monthNumber}"
+        val dayOfMonth = "/${this.dayOfMonth}"
 
-        val hour = this.hour.toString().padStart(2, '0')
-        val minute = this.minute.toString().padStart(2, '0')
+        val hour = this.hour.toString()
+        val minute = this.minute.toString()
 
         return "$year$monthNumber$dayOfMonth$dayOfWeek $hour:$minute"
     }

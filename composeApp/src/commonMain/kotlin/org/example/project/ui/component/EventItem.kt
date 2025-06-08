@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
@@ -26,6 +28,7 @@ import org.jetbrains.compose.resources.stringResource
 import pickupconnpassevents.composeapp.generated.resources.Res
 import pickupconnpassevents.composeapp.generated.resources.event_item_location
 import pickupconnpassevents.composeapp.generated.resources.event_item_start
+import pickupconnpassevents.composeapp.generated.resources.event_item_tbd
 import pickupconnpassevents.composeapp.generated.resources.favorite_filled
 import pickupconnpassevents.composeapp.generated.resources.favorite_outline
 
@@ -48,6 +51,7 @@ fun EventItem(
         }
     ) {
         EventInfoArea(
+            modifier = Modifier.weight(6f),
             startedAt = startedAt,
             title = title,
             place = place,
@@ -58,6 +62,7 @@ fun EventItem(
         FavoriteButton(
             isFavorite = isFavorite,
             onClick = { onFavoriteButtonClick(id.toLong()) },
+            modifier = Modifier.size(32.dp).weight(1f)
         )
     }
 }
@@ -111,12 +116,13 @@ private fun EventTitle(
     eventTitle: String,
     modifier: Modifier = Modifier,
 ) {
-    // todo: 長すぎるタイトルを省略する
     Text(
         modifier = modifier,
         text = eventTitle,
         fontSize = 20.sp,
         fontWeight = FontWeight.Bold,
+        maxLines = 1,
+        overflow = Ellipsis
     )
 }
 
@@ -131,7 +137,7 @@ private fun EventLocation(
         )
         Text(
             modifier = modifier,
-            text = location ?: "未定", //todo: 文字列リソースにする
+            text = location ?: stringResource(Res.string.event_item_tbd),
             fontSize = 16.sp,
         )
     }
@@ -147,7 +153,7 @@ private fun EventStartDate(
             text = stringResource(Res.string.event_item_start),
         )
         Text(
-            text = startedAt ?: "未定",
+            text = startedAt ?: stringResource(Res.string.event_item_tbd),
             fontSize = 16.sp,
         )
     }
