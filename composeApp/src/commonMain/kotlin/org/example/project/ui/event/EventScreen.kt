@@ -29,12 +29,12 @@ fun EventScreen(
             viewModel.refresh()
         }
     ) {
-        if (uiState.events == null) {
+        if (uiState.events.isNullOrEmpty()) {
             EmptyEvents()
         } else {
             EventList(
                 uiState = uiState,
-//                onFavoriteButtonClick = viewModel::onFavoriteButtonClick
+                onFavoriteButtonClick = viewModel::onFavoriteButtonClick
             )
         }
     }

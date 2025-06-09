@@ -1,4 +1,4 @@
-package org.example.project.ui.event.component
+package org.example.project.ui.favorite.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import org.example.project.ui.component.EventInfoArea
 
 @Composable
-fun EventItem(
+fun FavoriteItem(
     id: Long,
     isFavorite: Boolean,
     title: String,

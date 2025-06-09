@@ -17,4 +17,10 @@ interface EventDao {
 
     @Query("SELECT * FROM EventDto")
     fun getAll(): Flow<List<EventDto>>
+
+    @Query("UPDATE EventDto SET isFavorite = :isFavorite WHERE id = :id")
+    suspend fun updateFavorite(id: Long, isFavorite: Boolean)
+
+    @Query("SELECT * FROM EventDto WHERE isFavorite = 1")
+    fun getFavoriteEvents(): Flow<List<EventDto>>
 }

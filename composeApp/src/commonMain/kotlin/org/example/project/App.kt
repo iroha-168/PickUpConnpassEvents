@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import org.example.project.ui.event.EventScreen
 import org.example.project.ui.event.EventViewModel
 import org.example.project.ui.favorite.FavoriteScreen
+import org.example.project.ui.favorite.FavoriteViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.getKoin
@@ -82,11 +83,17 @@ fun AppNavHost(
                     Destination.Events -> {
                         val eventViewModel: EventViewModel = getKoin().get()
                         EventScreen(
-                            modifier = modifier,
                             viewModel = eventViewModel,
+                            modifier = modifier,
                         )
                     }
-                    Destination.Favorites -> FavoriteScreen(modifier)
+                    Destination.Favorites -> {
+                        val favoriteViewModel: FavoriteViewModel = getKoin().get()
+                        FavoriteScreen(
+                            viewModel = favoriteViewModel,
+                            modifier =  modifier,
+                        )
+                    }
                 }
             }
         }

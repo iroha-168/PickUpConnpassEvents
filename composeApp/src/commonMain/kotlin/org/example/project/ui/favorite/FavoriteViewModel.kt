@@ -1,21 +1,21 @@
-package org.example.project.ui.event
+package org.example.project.ui.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.example.project.data.repository.EventRepository
+import org.example.project.ui.event.EventItemUiState
+import org.example.project.ui.event.EventUiState
 
-class EventViewModel(
-    private val eventRepository: EventRepository
+class FavoriteViewModel(
+    private val eventRepository: EventRepository,
 ): ViewModel() {
     val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
         viewModelScope.launch {
-            eventRepository.events.collect { events ->
-                Logger.d{"HOGE: $events"}
+            eventRepository.favoriteEvents.collect { events ->
                 val itemUiState = events.map { event ->
                     EventItemUiState(event)
                 }
@@ -24,20 +24,6 @@ class EventViewModel(
         }
     }
     val uiState: StateFlow<EventUiState> = _uiState
-
-    init {
-        refresh()
-    }
-
-    fun refresh() {
-        viewModelScope.launch {
-            setRefreshingState(true)
-//            val hoge = eventRepository.hoge()
-//            _uiState.update { it.copy(hoge = hoge) }
-            eventRepository.refresh()
-            setRefreshingState(false)
-        }
-    }
 
     fun onFavoriteButtonClick(
         id: Long,
@@ -49,9 +35,5 @@ class EventViewModel(
                 isFavorite = isFavorite,
             )
         }
-    }
-
-    private fun setRefreshingState(state: Boolean) {
-        _uiState.update { it.copy(isRefreshing = state) }
     }
 }

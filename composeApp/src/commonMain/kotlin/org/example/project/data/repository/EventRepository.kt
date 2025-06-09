@@ -11,6 +11,7 @@ class EventRepository(
     private val eventDao: EventDao,
 ) {
     val events = eventDao.getAll()
+    val favoriteEvents = eventDao.getFavoriteEvents()
 
     suspend fun hoge(): String {
         delay(timeMillis = 1000)
@@ -22,6 +23,16 @@ class EventRepository(
         val result = connpassApiClient.getEvents()
         val events = filterEvents(result.events)
         upsertEvents(events)
+    }
+
+    suspend fun updateFavorite(
+        id: Long,
+        isFavorite: Boolean,
+    ) {
+        eventDao.updateFavorite(
+            id = id,
+            isFavorite = isFavorite,
+        )
     }
 
     private suspend fun upsertEvents(events: List<EventDto>) {

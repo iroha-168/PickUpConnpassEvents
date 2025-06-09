@@ -14,7 +14,7 @@ import org.example.project.ui.event.EventUiState
 @Composable
 fun EventList(
     modifier: Modifier = Modifier,
-    onFavoriteButtonClick: (Long) -> Unit = {},
+    onFavoriteButtonClick: (Long, Boolean) -> Unit,
     uiState: EventUiState,
 ) {
     LazyColumn(
@@ -35,7 +35,7 @@ fun EventList(
                 startedAt = it.formattedDate,
                 place = event.place,
                 isFavorite = event.isFavorite,
-                onFavoriteButtonClick = onFavoriteButtonClick
+                onFavoriteButtonClick = onFavoriteButtonClick,
             )
             Spacer(modifier = Modifier.padding(bottom = 8.dp))
         }
