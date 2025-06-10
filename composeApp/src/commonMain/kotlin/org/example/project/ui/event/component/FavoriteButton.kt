@@ -8,7 +8,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import co.touchlab.kermit.Logger
 import org.jetbrains.compose.resources.painterResource
 import pickupconnpassevents.composeapp.generated.resources.Res
 import pickupconnpassevents.composeapp.generated.resources.favorite_filled
@@ -27,14 +26,12 @@ fun FavoriteButton(
         onClick = {
             isFav = !isFav
             onClick(id, isFav)
-            Logger.d { "HOGE: FavoriteButton id=$id, isFav=$isFav" }
         },
         modifier = modifier
     ) {
         val iconRes = if (isFav) {
             Res.drawable.favorite_filled
         } else {
-            Logger.d { "HOGE: iconRes id=$id, isFav=$isFav" }
             Res.drawable.favorite_outline
         }
 

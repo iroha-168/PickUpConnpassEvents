@@ -2,7 +2,6 @@ package org.example.project.ui.event
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -12,10 +11,9 @@ import org.example.project.data.repository.EventRepository
 class EventViewModel(
     private val eventRepository: EventRepository
 ): ViewModel() {
-    val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
+    private val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
         viewModelScope.launch {
             eventRepository.events.collect { events ->
-                Logger.d{"HOGE: $events"}
                 val itemUiState = events.map { event ->
                     EventItemUiState(event)
                 }
@@ -32,8 +30,6 @@ class EventViewModel(
     fun refresh() {
         viewModelScope.launch {
             setRefreshingState(true)
-//            val hoge = eventRepository.hoge()
-//            _uiState.update { it.copy(hoge = hoge) }
             eventRepository.refresh()
             setRefreshingState(false)
         }

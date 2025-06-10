@@ -13,7 +13,7 @@ import org.example.project.ui.event.EventUiState
 class FavoriteViewModel(
     private val eventRepository: EventRepository,
 ): ViewModel() {
-    val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
+    private val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
         viewModelScope.launch {
             eventRepository.favoriteEvents.collect { events ->
                 val itemUiState = events.map { event ->

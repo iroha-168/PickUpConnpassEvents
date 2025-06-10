@@ -10,7 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import co.touchlab.kermit.Logger
 import org.example.project.ui.favorite.component.FavoriteItem
 import org.example.project.ui.favorite.section.EmptyFavorites
 

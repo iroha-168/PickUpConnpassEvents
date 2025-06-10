@@ -20,13 +20,7 @@ fun EventList(
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-//                item {
-//                    Text(
-//                        text = "Koin & Ktorのテスト： ${uiState.hoge}",
-//                    )
-//                    Spacer(modifier = Modifier.padding(bottom = 8.dp))
-//                }
-
+        // todo: itemsIndexedに変更
         items(uiState.events!!) {
             val event = it.event
             EventItem(
@@ -38,6 +32,9 @@ fun EventList(
                 onFavoriteButtonClick = onFavoriteButtonClick,
             )
             Spacer(modifier = Modifier.padding(bottom = 8.dp))
+
+            // todo: indexが最後になった時に次のデータを読みこむ
+
         }
     }
 }
