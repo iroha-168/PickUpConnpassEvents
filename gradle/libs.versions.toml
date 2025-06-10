@@ -25,6 +25,7 @@ coroutines = "1.10.2"
 roomGradlePlugin = "2.7.1"
 sqlite = "2.5.1"
 ksp = "2.1.21-2.0.1"
+buildKonfig = "0.17.1"
 
 [libraries]
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomGradlePlugin" }
@@ -54,6 +55,8 @@ navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-co
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor"}
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
@@ -67,3 +70,5 @@ composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "k
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 androidx-room-gradle-plugin = { id = "androidx.room", version.ref = "roomGradlePlugin" }
+build-konfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig"}
+

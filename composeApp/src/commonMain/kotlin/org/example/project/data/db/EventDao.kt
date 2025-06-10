@@ -5,12 +5,18 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.LocalDateTime
 
 
 @Dao
 interface EventDao {
-    @Update
-    suspend fun updateEvent(event: EventDto)
+    @Query("UPDATE EventDto SET title = :title, startedAt = :startAt, place = :place WHERE id = :id")
+    suspend fun updateEvent(
+        id: Long,
+        title: String,
+        startAt: LocalDateTime?,
+        place: String?
+    )
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertEvent(event: EventDto): Long

@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -7,7 +9,9 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.ksp)
-    alias (libs.plugins.androidx.room.gradle.plugin)
+    alias(libs.plugins.androidx.room.gradle.plugin)
+    alias(libs.plugins.build.konfig)
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -31,7 +35,6 @@ kotlin {
     }
     
     sourceSets {
-        
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -53,13 +56,14 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.datetime)
             // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             // Ktor
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.core)
+            implementation(libs.ktor.negotiation)
+            implementation(libs.ktor.serialization.json)
             // Kermit
             implementation(libs.kermit)
             // Room and SQLite
@@ -120,4 +124,13 @@ configurations.all {
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+buildkonfig {
+    packageName = "org.example.project"
+
+    defaultConfigs {
+        val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("API_KEY")
+        buildConfigField(FieldSpec.Type.STRING, "API_KEY", apiKey)
+    }
 }

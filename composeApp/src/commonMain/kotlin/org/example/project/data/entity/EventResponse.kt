@@ -1,6 +1,12 @@
 package org.example.project.data.entity
 
+import co.touchlab.kermit.Logger
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format.DateTimeComponents.Companion.Format
+import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
@@ -22,24 +28,28 @@ data class Event(
     val id: Long,
     val title: String,
     @SerialName("started_at")
-    val startedAt: DateTime?,
+    @Serializable(with = LocalDateTimeSerializer::class)
+    val startedAt: LocalDateTime?,
     val place: String?,
 )
 
-@Serializable(with = LocalDateTimeSerializer::class)
-data class DateTime(val date: LocalDateTime)
-
 @OptIn(ExperimentalSerializationApi::class)
-@Serializer(forClass = LocalDateTime::class)
-object LocalDateTimeSerializer : KSerializer<LocalDateTime> {
+object LocalDateTimeSerializer : KSerializer<LocalDateTime?> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: LocalDateTime) {
+    override fun serialize(encoder: Encoder, value: LocalDateTime?) {
         encoder.encodeString(value.toString())
     }
 
-    override fun deserialize(decoder: Decoder): LocalDateTime {
-        return LocalDateTime.parse(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): LocalDateTime? {
+        try {
+            val instant = Instant.parse(decoder.decodeString())
+            val timeZone = TimeZone.of("Asia/Tokyo")
+            return instant.toLocalDateTime(timeZone)
+        } catch (e: Exception) {
+            Logger.e { "HOGE: $e" }
+           return null
+        }
     }
 }

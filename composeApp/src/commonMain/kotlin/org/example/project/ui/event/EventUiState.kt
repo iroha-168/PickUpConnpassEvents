@@ -13,7 +13,7 @@ data class EventUiState(
 data class EventItemUiState(
     val event: EventDto,
 ) {
-    val formattedDate = event.startedAt?.date?.formatJapanese()
+    val formattedDate = event.startedAt?.formatJapanese()
 
     fun LocalDateTime.formatJapanese(): String {
         val dayOfWeek = when (this.dayOfWeek) {

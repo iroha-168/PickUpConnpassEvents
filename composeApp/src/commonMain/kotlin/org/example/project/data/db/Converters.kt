@@ -1,17 +1,24 @@
 package org.example.project.data.db
 
 import androidx.room.TypeConverter
+import co.touchlab.kermit.Logger
 import kotlinx.datetime.LocalDateTime
-import org.example.project.data.entity.DateTime
 
 class Converters {
     @TypeConverter
-    fun toDateTime(value: String?): DateTime? {
-        return value?.let { DateTime(LocalDateTime.parse(it)) }
+    fun toDateTime(value: String?): LocalDateTime? {
+        return value?.let {
+            try {
+                LocalDateTime.parse(it)
+            } catch (e: Exception) {
+                Logger.e{"HOGE: Error parsing date time: $e"}
+                null
+            }
+        }
     }
 
     @TypeConverter
-    fun dateTimeToString(dateTime: DateTime?): String? {
+    fun dateTimeToString(dateTime: LocalDateTime?): String? {
         return dateTime?.date?.toString()
     }
 }

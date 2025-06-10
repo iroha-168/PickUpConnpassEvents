@@ -2,14 +2,14 @@ package org.example.project.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.example.project.data.entity.DateTime
+import kotlinx.datetime.LocalDateTime
 
 @Entity
 data class EventDto(
     @PrimaryKey
     val id: Long,
     val title: String,
-    val startedAt: DateTime?,
+    val startedAt: LocalDateTime?,
     val place: String?,
     val isFavorite: Boolean
 )
