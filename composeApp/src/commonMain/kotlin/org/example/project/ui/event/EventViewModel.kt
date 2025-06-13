@@ -11,6 +11,9 @@ import org.example.project.data.repository.EventRepository
 class EventViewModel(
     private val eventRepository: EventRepository
 ): ViewModel() {
+    private var start = 1
+    private val page = 20
+
     private val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
         viewModelScope.launch {
             eventRepository.events.collect { events ->
@@ -30,7 +33,11 @@ class EventViewModel(
     fun refresh() {
         viewModelScope.launch {
             setRefreshingState(true)
-            eventRepository.refresh()
+            eventRepository.refresh(
+                start = start,
+                page = page,
+            )
+            start += page
             setRefreshingState(false)
         }
     }

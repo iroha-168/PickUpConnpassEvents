@@ -11,8 +11,14 @@ class EventRepository(
     val events = eventDao.getAll()
     val favoriteEvents = eventDao.getFavoriteEvents()
 
-    suspend fun refresh() {
-        val result = connpassApiClient.getEvents()
+    suspend fun refresh(
+        start: Int,
+        page: Int,
+    ) {
+        val result = connpassApiClient.getEvents(
+            start = start,
+            count = page,
+        )
         val events = result.events.map {
             EventDto(
                 id = it.id,

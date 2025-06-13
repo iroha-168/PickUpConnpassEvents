@@ -23,7 +23,10 @@ class ConnpassApiClient {
         }
     }
 
-    suspend fun getEvents(): EventResponse {
+    suspend fun getEvents(
+        start: Int,
+        count: Int,
+    ): EventResponse {
         return client.get(ENDPOINT_EVENTS){
             headers {
                 append(X_API_KEY, BuildKonfig.API_KEY)
@@ -34,7 +37,8 @@ class ConnpassApiClient {
                 parameters.append("keyword_or", "kotlin")
                 parameters.append("keyword_or", "ios")
                 parameters.append("keyword_or", "swift")
-                parameters.append("count", "20")
+                parameters.append("start", start.toString())
+                parameters.append("count", count.toString())
                 parameters.append("order", "2")
             }
         }.body()
@@ -43,6 +47,5 @@ class ConnpassApiClient {
     companion object {
         private const val X_API_KEY = "X-API-Key"
         private const val ENDPOINT_EVENTS = "https://connpass.com/api/v2/events/"
-        private const val ENDPOINT_SAMPLE = "https://ktor.io/"
     }
 }
