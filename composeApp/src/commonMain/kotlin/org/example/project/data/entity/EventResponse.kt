@@ -17,7 +17,7 @@ import kotlinx.serialization.encoding.Encoder
 
 @Serializable
 data class EventResponse (
-    val events: List<Event>
+    val events: List<Event> = emptyList()
 )
 
 @Serializable
