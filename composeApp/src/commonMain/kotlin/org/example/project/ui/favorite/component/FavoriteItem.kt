@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.example.project.ui.component.EventInfoArea
+import theming.AppTheme
 
 @Composable
 fun FavoriteItem(
@@ -28,7 +29,7 @@ fun FavoriteItem(
         modifier = modifier.run {
             fillMaxWidth()
                 .clip(RoundedCornerShape(16.dp))
-                .background(color = Color.LightGray)
+                .background(color = AppTheme.colors.primary)
                 .padding(16.dp)
         }
     ) {

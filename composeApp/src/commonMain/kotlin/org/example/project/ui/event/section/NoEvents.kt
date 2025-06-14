@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,7 +21,7 @@ import pickupconnpassevents.composeapp.generated.resources.empty_events_not_foun
 import pickupconnpassevents.composeapp.generated.resources.sentiment_neutral
 
 @Composable
-fun EmptyEvents(
+fun NoEvents(
     modifier: Modifier = Modifier,
 ) {
     Column(

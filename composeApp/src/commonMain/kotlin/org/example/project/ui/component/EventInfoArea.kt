@@ -2,6 +2,7 @@ package org.example.project.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +14,7 @@ import pickupconnpassevents.composeapp.generated.resources.Res
 import pickupconnpassevents.composeapp.generated.resources.event_item_location
 import pickupconnpassevents.composeapp.generated.resources.event_item_start
 import pickupconnpassevents.composeapp.generated.resources.event_item_tbd
+import theming.AppTheme
 
 @Composable
 fun EventInfoArea(
@@ -36,10 +38,9 @@ private fun EventTitle(
     Text(
         modifier = modifier,
         text = eventTitle,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
+        style = AppTheme.typography.headlineLarge,
         maxLines = 1,
-        overflow = Ellipsis
+        overflow = Ellipsis,
     )
 }
 
@@ -51,11 +52,12 @@ private fun EventLocation(
     Row(modifier = modifier) {
         Text(
             text = stringResource(Res.string.event_item_location),
+            style = AppTheme.typography.bodyMedium,
         )
         Text(
             modifier = modifier,
             text = location ?: stringResource(Res.string.event_item_tbd),
-            fontSize = 16.sp,
+            style = AppTheme.typography.bodyMedium,
         )
     }
 }
@@ -68,10 +70,11 @@ private fun EventStartDate(
     Row(modifier = modifier) {
         Text(
             text = stringResource(Res.string.event_item_start),
+            style = AppTheme.typography.bodyMedium,
         )
         Text(
             text = startedAt ?: stringResource(Res.string.event_item_tbd),
-            fontSize = 16.sp,
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }

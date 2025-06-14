@@ -4,15 +4,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,12 +26,13 @@ import org.example.project.ui.favorite.FavoriteViewModel
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.getKoin
+import theming.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    AppTheme {
         val navController = rememberNavController()
         val startDestination = Destination.Events
         var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
@@ -38,6 +41,12 @@ fun App() {
             Column {
                 PrimaryTabRow(
                     selectedTabIndex = selectedDestination,
+                    indicator = {
+                        TabRowDefaults.PrimaryIndicator(
+                            modifier = Modifier.tabIndicatorOffset(selectedDestination, matchContentSize = true),
+                            color = AppTheme.colors.onPrimary,
+                        )
+                    },
                     modifier = Modifier.padding(contentPadding)
                 ) {
                     Destination.entries.forEachIndexed { index, destination ->
@@ -52,7 +61,8 @@ fun App() {
                             text = {
                                 Text(
                                     text = stringResource(destination.labelRes),
-                                    fontSize = 16.sp,
+                                    style = AppTheme.typography.headlineMedium,
+                                    color = AppTheme.colors.onPrimary,
                                 )
                             }
                         )

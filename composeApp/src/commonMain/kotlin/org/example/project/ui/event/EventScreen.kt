@@ -9,7 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
-import org.example.project.ui.event.section.EmptyEvents
+import org.example.project.ui.event.section.NoEvents
 import org.example.project.ui.event.section.EventList
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,8 +29,8 @@ fun EventScreen(
             viewModel.refresh()
         }
     ) {
-        if (uiState.events.isNullOrEmpty()) {
-            EmptyEvents()
+        if(uiState.events == null) {
+            NoEvents()
         } else {
             EventList(
                 uiState = uiState,

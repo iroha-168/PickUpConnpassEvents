@@ -23,7 +23,7 @@ import pickupconnpassevents.composeapp.generated.resources.empty_favorites_not_f
 import pickupconnpassevents.composeapp.generated.resources.sentiment_neutral
 
 @Composable
-fun EmptyFavorites(
+fun NoFavorites(
     modifier: Modifier = Modifier,
 ) {
     Column(

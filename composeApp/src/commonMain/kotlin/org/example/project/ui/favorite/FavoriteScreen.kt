@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.example.project.ui.favorite.component.FavoriteItem
-import org.example.project.ui.favorite.section.EmptyFavorites
+import org.example.project.ui.favorite.section.NoFavorites
 
 @Composable
 fun FavoriteScreen(
@@ -26,7 +26,7 @@ fun FavoriteScreen(
     ) {
         if(uiState.events.isNullOrEmpty()) {
             item {
-                EmptyFavorites()
+                NoFavorites()
             }
         } else {
             items(uiState.events!!) {
