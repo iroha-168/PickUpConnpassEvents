@@ -40,7 +40,6 @@ class EventViewModel(
                 }
                 is EventRepository.Result.Failure -> {
                     val errorMessage = result.error.message ?: "An unexpected error occurred"
-                    Logger.e{"HOGE: result.isFailure: $errorMessage"}
                     _uiState.update {
                         it.copy(uiEvents = it.uiEvents + EventUiEvent.Failure(message = errorMessage))
                     }
