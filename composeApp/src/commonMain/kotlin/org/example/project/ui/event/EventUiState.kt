@@ -8,6 +8,7 @@ data class EventUiState(
     val hoge: String? = null,
     val isRefreshing: Boolean = false,
     val events: List<EventItemUiState>? = null,
+    val uiEvents: List<EventUiEvent> = emptyList(),
 )
 
 data class EventItemUiState(

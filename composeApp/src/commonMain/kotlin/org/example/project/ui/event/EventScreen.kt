@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
+import org.example.project.ui.event.section.ErrorDialog
 import org.example.project.ui.event.section.NoEvents
 import org.example.project.ui.event.section.EventList
 
@@ -19,6 +20,19 @@ fun EventScreen(
     modifier: Modifier = Modifier,
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    uiState.uiEvents.firstOrNull()?.let { event ->
+        when (event) {
+            is EventUiEvent.Failure -> {
+                ErrorDialog(
+                    message = event.message,
+                    onDismissRequest = {
+                        viewModel.consumeEvents(event)
+                    }
+                )
+            }
+        }
+    }
 
     PullToRefreshBox(
         modifier = modifier
