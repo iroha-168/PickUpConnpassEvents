@@ -25,4 +25,4 @@
 - HTTPクライアントライブラリ：[Ktor Client](https://ktor.io/docs/client-create-multiplatform-application.html)
 - DIライブラリ：[Koin](https://insert-koin.io/)
 - DB：[Room](https://developer.android.com/kotlin/multiplatform/room?hl=ja)
-- その他：[BuildKonfig](https://github.com/yshrsmz/BuildKonfig), [Connpass API](https://connpass.com/about/api/v2/)
+- その他：[BuildKonfig](https://github.com/yshrsmz/BuildKonfig), [Connpass API](https://connpass.com/about/api/v2/), [kermit](https://kermit.touchlab.co/docs/)
