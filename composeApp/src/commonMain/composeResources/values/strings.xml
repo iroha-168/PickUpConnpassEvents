@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PickUpConnpassEvents</string>
+    <string name="tab_name_events">Events</string>
+    <string name="tab_name_favorites">Favorites</string>
+    <string name="event_item_location">location: </string>
+    <string name="event_item_start">start: </string>
+    <string name="event_item_tbd">TBD</string>
+    <string name="empty_events_not_found">Events not found</string>
+    <string name="empty_favorites_not_found">You have no favorite events</string>
+    <string name="empty_favorites_not_found_details">When you find a favorite event \nin the Events screen \nTry tapping the heart icon</string>
+    <string name="error_dialog_title">Error</string>
+    <string name="error_dialog_button">OK</string>
+</resources>
