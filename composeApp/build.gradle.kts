@@ -130,7 +130,9 @@ buildkonfig {
     packageName = "org.example.project"
 
     defaultConfigs {
-        val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("API_KEY")
+        val apiKey: String = System.getenv("API_KEY")
+            ?: gradleLocalProperties(rootDir, providers).getProperty("API_KEY")
+            ?: error("API_KEY is missing. Set it in local.properties or GitHub Secrets.")
         buildConfigField(FieldSpec.Type.STRING, "API_KEY", apiKey)
     }
 }
