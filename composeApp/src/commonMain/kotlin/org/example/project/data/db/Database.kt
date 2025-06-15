@@ -29,7 +29,6 @@ fun getRoomDatabase(
 ): EventDatabase {
     return builder
         .addMigrations(*MIGRATIONS)
-//        .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
         .build()

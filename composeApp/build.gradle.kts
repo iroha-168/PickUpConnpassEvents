@@ -71,7 +71,7 @@ kotlin {
             implementation(libs.androidx.sqlite)
             implementation(libs.androidx.sqlite.bundled)
             // Kotlinx DateTime
-            implementation(libs.kotlinx.datetime.v062)
+            implementation(libs.kotlinx.datetime)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
