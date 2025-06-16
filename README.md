@@ -3,9 +3,10 @@
 取得してきた情報は、Events画面で一覧表示されます。また、気になるイベントをお気に入り登録することも可能です。  
 お気に入り登録したイベントはFavorites画面で確認できます。
 
-| Events画面 | Favorites画面 |
-|-----------|-----------|
-| <img src="https://github.com/user-attachments/assets/dee5ed80-386e-456f-9f46-47b58936a566" width=200> | <img src="https://github.com/user-attachments/assets/439daeed-1b88-4399-b9a0-31deef1fce20" width=200> |
+| Events画面 | Favorites画面 | 動画 |
+|-----------|-----------|-----------|
+| <img src="https://github.com/user-attachments/assets/dee5ed80-386e-456f-9f46-47b58936a566" width=300> | <img src="https://github.com/user-attachments/assets/439daeed-1b88-4399-b9a0-31deef1fce20" width=300> | <video src="https://github.com/user-attachments/assets/c4cad9f7-4ce0-4780-8e43-11f4d9c9fb94" width=200> |
+
 
 また、iPhoneからもアプリを起動することができます。
 | Events画面 | Favorites画面 |
