@@ -13,7 +13,7 @@
 |-----------|-----------|
 | <img src="https://github.com/user-attachments/assets/dff58524-472e-4d34-a3fd-db373eb4ae50" width=200> | <img src="https://github.com/user-attachments/assets/3485602d-443d-40b3-af9c-3b28bc2c8bf8" width=200> |
 
-また、ダークモードにも対応しています。
+ダークモードにも対応しています。
 
 | Events画面 | Favorites画面 |
 |-----------|-----------|
