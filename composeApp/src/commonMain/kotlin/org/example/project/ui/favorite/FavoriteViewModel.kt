@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.example.project.data.repository.EventRepository
+import org.example.project.data.repository.EventRepositoryImpl
 import org.example.project.ui.event.EventItemUiState
 import org.example.project.ui.event.EventUiState
 

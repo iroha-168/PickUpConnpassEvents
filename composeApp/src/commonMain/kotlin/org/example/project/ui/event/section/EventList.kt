@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.example.project.ui.event.component.EventItem
 import org.example.project.ui.event.EventUiState
+import org.example.project.ui.event.component.EventItem
 
 @Composable
 fun EventList(
@@ -18,6 +18,7 @@ fun EventList(
     onFavoriteButtonClick: (Long, Boolean) -> Unit,
     refresh: () -> Unit,
     uiState: EventUiState,
+    lastIndex: Int,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize()
@@ -34,13 +35,11 @@ fun EventList(
                 onFavoriteButtonClick = onFavoriteButtonClick,
             )
             Spacer(modifier = Modifier.padding(bottom = 8.dp))
-
-            if (index == events.lastIndex) {
+            if (index == lastIndex) {
                 LaunchedEffect(Unit) {
                     refresh()
                 }
             }
-
         }
     }
 }

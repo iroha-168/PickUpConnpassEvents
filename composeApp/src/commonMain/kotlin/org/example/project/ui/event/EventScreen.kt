@@ -6,12 +6,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.runtime.getValue
 import org.example.project.ui.event.section.ErrorDialog
-import org.example.project.ui.event.section.NoEvents
 import org.example.project.ui.event.section.EventList
+import org.example.project.ui.event.section.NoEvents
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,6 +50,7 @@ fun EventScreen(
                 uiState = uiState,
                 onFavoriteButtonClick = viewModel::onFavoriteButtonClick,
                 refresh = viewModel::refresh,
+                lastIndex = viewModel.page - 1,
             )
         }
     }
