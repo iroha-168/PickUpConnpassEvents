@@ -2,18 +2,19 @@ package org.example.project.ui.event
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.example.project.data.repository.EventRepository
+import org.example.project.data.repository.Result.Failure
+import org.example.project.data.repository.Result.Success
 
 class EventViewModel(
     private val eventRepository: EventRepository
 ): ViewModel() {
-    private var start = 1
-    private val page = 20
+    var start = 1
+    val page = 20
 
     private val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
         viewModelScope.launch {
@@ -32,13 +33,14 @@ class EventViewModel(
     }
 
     fun refresh() {
+        if (_uiState.value.isRefreshing) return
         viewModelScope.launch {
             setRefreshingState(true)
             when (val result = eventRepository.refresh(start, page)) {
-                is EventRepository.Result.Success -> {
+                is Success -> {
                     start += page
                 }
-                is EventRepository.Result.Failure -> {
+                is Failure -> {
                     val errorMessage = result.error.message ?: "An unexpected error occurred"
                     _uiState.update {
                         it.copy(uiEvents = it.uiEvents + EventUiEvent.Failure(message = errorMessage))
