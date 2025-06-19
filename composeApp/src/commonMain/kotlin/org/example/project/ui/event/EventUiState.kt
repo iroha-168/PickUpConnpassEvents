@@ -32,7 +32,7 @@ data class EventItemUiState(
         val dayOfMonth = "/${this.dayOfMonth}"
 
         val hour = this.hour.toString()
-        val minute = this.minute.toString()
+        val minute = if (this.minute == 0) "00" else this.minute.toString()
 
         return "$year$monthNumber$dayOfMonth$dayOfWeek $hour:$minute"
     }
