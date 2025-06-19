@@ -19,6 +19,6 @@ class Converters {
 
     @TypeConverter
     fun dateTimeToString(dateTime: LocalDateTime?): String? {
-        return dateTime?.date?.toString()
+        return dateTime?.toString()
     }
 }
