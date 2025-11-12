@@ -48,9 +48,10 @@ fun EventScreen(
         } else {
             EventList(
                 uiState = uiState,
-                onFavoriteButtonClick = viewModel::onFavoriteButtonClick,
-                refresh = viewModel::refresh,
                 lastIndex = viewModel.page - 1,
+                refresh = viewModel::refresh,
+                onFavoriteButtonClick = viewModel::onFavoriteButtonClick,
+                onEventCardClick = viewModel::onEventClick,
             )
         }
     }

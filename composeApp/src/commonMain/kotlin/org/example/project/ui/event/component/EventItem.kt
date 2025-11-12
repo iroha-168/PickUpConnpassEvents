@@ -1,6 +1,7 @@
 package org.example.project.ui.event.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,6 +24,7 @@ fun EventItem(
     startedAt: String?,
     place: String?,
     onFavoriteButtonClick: (Long, Boolean) -> Unit,
+    onEventCardClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -31,6 +33,9 @@ fun EventItem(
                 .clip(RoundedCornerShape(16.dp))
                 .background(color = AppTheme.colors.primary)
                 .padding(16.dp)
+        }.clickable {
+            // TODO: クリックされたらイベントページに遷移
+            onEventCardClick
         }
     ) {
         EventInfoArea(

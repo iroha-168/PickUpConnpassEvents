@@ -65,6 +65,11 @@ class EventViewModel(
         }
     }
 
+    fun onEventClick(url: String) {
+        // TODO: expect fun openUrlを呼ぶ？
+
+    }
+
     fun consumeEvents(event: EventUiEvent) {
         val newEvents = _uiState.value.uiEvents.filterNot { it == event }
         _uiState.update { it.copy(uiEvents = newEvents) }

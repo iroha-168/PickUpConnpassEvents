@@ -15,10 +15,11 @@ import org.example.project.ui.event.component.EventItem
 @Composable
 fun EventList(
     modifier: Modifier = Modifier,
-    onFavoriteButtonClick: (Long, Boolean) -> Unit,
-    refresh: () -> Unit,
     uiState: EventUiState,
     lastIndex: Int,
+    refresh: () -> Unit,
+    onEventCardClick: (String) -> Unit,
+    onFavoriteButtonClick: (Long, Boolean) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize()
@@ -33,6 +34,9 @@ fun EventList(
                 place = event.place,
                 isFavorite = event.isFavorite,
                 onFavoriteButtonClick = onFavoriteButtonClick,
+                onEventCardClick = {
+                    onEventCardClick(event.url)
+                },
             )
             Spacer(modifier = Modifier.padding(bottom = 8.dp))
             if (index == lastIndex) {
