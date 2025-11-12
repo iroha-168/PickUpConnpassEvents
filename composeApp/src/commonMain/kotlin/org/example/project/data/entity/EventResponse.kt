@@ -24,6 +24,7 @@ data class EventResponse (
 data class Event(
     val id: Long,
     val title: String,
+    val url: String,
     @SerialName("started_at")
     @Serializable(with = LocalDateTimeSerializer::class)
     val startedAt: LocalDateTime?,

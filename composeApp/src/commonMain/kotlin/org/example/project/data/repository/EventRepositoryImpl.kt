@@ -24,6 +24,7 @@ class EventRepositoryImpl(
                 EventDto(
                     id = it.id,
                     title = it.title,
+                    url = it.url,
                     startedAt = it.startedAt,
                     place = it.place,
                     isFavorite = false
@@ -50,6 +51,7 @@ class EventRepositoryImpl(
                 eventDao.updateEvent(
                     id = event.id,
                     title = event.title,
+                    url = event.url,
                     startAt = event.startedAt,
                     place = event.place,
                 )

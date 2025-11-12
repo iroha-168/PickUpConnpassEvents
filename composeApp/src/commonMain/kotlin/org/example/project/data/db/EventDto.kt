@@ -9,6 +9,7 @@ data class EventDto(
     @PrimaryKey
     val id: Long,
     val title: String,
+    val url: String,
     val startedAt: LocalDateTime?,
     val place: String?,
     val isFavorite: Boolean

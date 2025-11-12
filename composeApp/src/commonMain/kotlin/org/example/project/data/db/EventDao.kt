@@ -10,10 +10,11 @@ import kotlinx.datetime.LocalDateTime
 
 @Dao
 interface EventDao {
-    @Query("UPDATE EventDto SET title = :title, startedAt = :startAt, place = :place WHERE id = :id")
+    @Query("UPDATE EventDto SET title = :title, url = :url, startedAt = :startAt, place = :place WHERE id = :id")
     suspend fun updateEvent(
         id: Long,
         title: String,
+        url: String,
         startAt: LocalDateTime?,
         place: String?
     )

@@ -6,13 +6,23 @@ import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
+import androidx.sqlite.SQLiteConnection
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import androidx.sqlite.execSQL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
-private val MIGRATIONS: Array<Migration> = arrayOf()
+private val MIGRATIONS: Array<Migration> = arrayOf(
+    object : Migration(1, 2) {
+        override fun migrate(connection: SQLiteConnection) {
+            connection.execSQL(
+                "ALTER TABLE `EventDto` ADD COLUMN `url` TEXT NOT NULL DEFAULT ''"
+            )
+        }
+    }
+)
 
-@Database(entities = [EventDto::class], version = 1)
+@Database(entities = [EventDto::class], version = 2)
 @ConstructedBy(EventDatabaseConstructor::class)
 @TypeConverters(Converters::class)
 abstract class EventDatabase : RoomDatabase() {
