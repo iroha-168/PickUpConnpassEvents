@@ -2,7 +2,6 @@ package org.example.project.ui.event
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -21,7 +20,6 @@ class EventViewModel(
         viewModelScope.launch {
             eventRepository.events.collect { events ->
                 val itemUiState = events.map { event ->
-                    Logger.d { "event url: ${event.url}" }
                     EventItemUiState(event)
                 }
                 uiState.update { it.copy(events = itemUiState) }
@@ -66,8 +64,7 @@ class EventViewModel(
     }
 
     fun onEventClick(url: String) {
-        // TODO: expect fun openUrlを呼ぶ？
-
+        _uiState.update { it.copy(uiEvents = it.uiEvents + EventUiEvent.OpenUrl(url)) }
     }
 
     fun consumeEvents(event: EventUiEvent) {

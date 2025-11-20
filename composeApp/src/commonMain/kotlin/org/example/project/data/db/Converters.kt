@@ -11,7 +11,7 @@ class Converters {
             try {
                 LocalDateTime.parse(it)
             } catch (e: Exception) {
-                Logger.e{"HOGE: Error parsing date time: $e"}
+                Logger.e{"Error parsing date time: $e"}
                 null
             }
         }

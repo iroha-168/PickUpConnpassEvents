@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import org.example.project.di.initKoin
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +20,15 @@ class MainActivity : ComponentActivity() {
         initKoin()
         initAndroidKoin()
         setContent {
-            App()
+            val context = LocalContext.current
+            App(
+                openUrl = { url ->
+                    openUrl(
+                        url = url,
+                        context = context,
+                    )
+                },
+            )
         }
     }
 
@@ -32,5 +41,7 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App()
+    App(
+        openUrl = { },
+    )
 }

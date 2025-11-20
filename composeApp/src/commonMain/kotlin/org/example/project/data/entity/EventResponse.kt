@@ -46,8 +46,8 @@ object LocalDateTimeSerializer : KSerializer<LocalDateTime?> {
             val timeZone = TimeZone.of("Asia/Tokyo")
             return instant.toLocalDateTime(timeZone)
         } catch (e: Exception) {
-            Logger.e { "HOGE: $e" }
-           return null
+            Logger.e { "error: $e" }
+            return null
         }
     }
 }

@@ -31,7 +31,9 @@ import theming.AppTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
-fun App() {
+fun App(
+    openUrl: (String) -> Unit,
+) {
     AppTheme {
         val navController = rememberNavController()
         val startDestination = Destination.Events
@@ -71,6 +73,7 @@ fun App() {
                 AppNavHost(
                     navController = navController,
                     startDestination = startDestination,
+                    openUrl = openUrl,
                 )
             }
         }
@@ -81,7 +84,8 @@ fun App() {
 fun AppNavHost(
     navController: NavHostController,
     startDestination: Destination,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    openUrl: (String) -> Unit,
 ) {
     NavHost(
         navController,
@@ -95,6 +99,7 @@ fun AppNavHost(
                         EventScreen(
                             viewModel = eventViewModel,
                             modifier = modifier,
+                            openUrl = openUrl,
                         )
                     }
                     Destination.Favorites -> {

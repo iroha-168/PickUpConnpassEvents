@@ -24,7 +24,7 @@ fun EventItem(
     startedAt: String?,
     place: String?,
     onFavoriteButtonClick: (Long, Boolean) -> Unit,
-    onEventCardClick: (String) -> Unit,
+    onEventCardClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -34,8 +34,7 @@ fun EventItem(
                 .background(color = AppTheme.colors.primary)
                 .padding(16.dp)
         }.clickable {
-            // TODO: クリックされたらイベントページに遷移
-            onEventCardClick
+            onEventCardClick()
         }
     ) {
         EventInfoArea(

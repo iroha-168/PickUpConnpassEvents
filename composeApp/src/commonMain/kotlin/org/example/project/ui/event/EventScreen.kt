@@ -9,6 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.example.project.openUrl
 import org.example.project.ui.event.section.ErrorDialog
 import org.example.project.ui.event.section.EventList
 import org.example.project.ui.event.section.NoEvents
@@ -18,6 +19,7 @@ import org.example.project.ui.event.section.NoEvents
 fun EventScreen(
     viewModel: EventViewModel,
     modifier: Modifier = Modifier,
+    openUrl: (String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -30,6 +32,11 @@ fun EventScreen(
                         viewModel.consumeEvents(event)
                     }
                 )
+            }
+
+            is EventUiEvent.OpenUrl -> {
+                openUrl(event.url)
+                viewModel.consumeEvents(event)
             }
         }
     }
