@@ -6,7 +6,7 @@ import androidx.core.net.toUri
 
 actual fun openUrl(url: String, context: Any?) {
     val context = context as? Context
-    // fixme: urlが実在するのに取得できな時がある
+    // fixme: urlが実在するのに取得できない時がある
     if (url.isBlank() || context == null) return
     val customTabsIntent = CustomTabsIntent.Builder()
         .setShowTitle(true)

@@ -5,7 +5,6 @@ import kotlinx.datetime.LocalDateTime
 import org.example.project.data.db.EventDto
 
 data class EventUiState(
-    val hoge: String? = null,
     val isRefreshing: Boolean = false,
     val events: List<EventItemUiState>? = null,
     val uiEvents: List<EventUiEvent> = emptyList(),
