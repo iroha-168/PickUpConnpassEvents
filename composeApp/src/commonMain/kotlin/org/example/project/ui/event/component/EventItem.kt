@@ -28,14 +28,14 @@ fun EventItem(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.run {
-            fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-                .background(color = AppTheme.colors.primary)
-                .padding(16.dp)
-        }.clickable {
-            onEventCardClick()
-        }
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .clickable {
+                onEventCardClick()
+            }
+            .background(color = AppTheme.colors.primary)
+            .padding(16.dp)
     ) {
         EventInfoArea(
             modifier = Modifier.weight(weight = 6f),
