@@ -1,6 +1,7 @@
 package org.example.project.data.repository
 
 import org.example.project.data.api.ConnpassApiClient
+import org.example.project.data.api.ConnpassApiClient.ConnpassQueryFilter
 import org.example.project.data.db.EventDao
 import org.example.project.data.db.EventDto
 
@@ -14,11 +15,13 @@ class EventRepositoryImpl(
     override suspend fun refresh(
         start: Int,
         page: Int,
+        filter: ConnpassQueryFilter,
     ): Result<Unit> {
         return handleApiResult {
             val result = connpassApiClient.getEvents(
                 start = start,
                 count = page,
+                filter = filter,
             )
             val events = result.events.map {
                 EventDto(

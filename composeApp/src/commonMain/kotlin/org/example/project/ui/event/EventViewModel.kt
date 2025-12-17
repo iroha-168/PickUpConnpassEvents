@@ -29,14 +29,14 @@ class EventViewModel(
     val uiState: StateFlow<EventUiState> = _uiState
 
     init {
-        refresh()
+        refresh(EventFilter.UpcomingEvents)
     }
 
-    fun refresh() {
+    fun refresh(filter: EventFilter) {
         if (_uiState.value.isRefreshing) return
         viewModelScope.launch {
             setRefreshingState(true)
-            when (val result = eventRepository.refresh(start, page)) {
+            when (val result = eventRepository.refresh(start, page, filter.toQuery())) {
                 is Success -> {
                     start += page
                 }
@@ -49,6 +49,14 @@ class EventViewModel(
             }
             setRefreshingState(false)
         }
+    }
+
+    fun onFilterChange(selectedFilter: EventFilter) {
+        _uiState.update { it.copy(filter = selectedFilter) }
+        // 選択した条件でテーブル更新
+        refresh(filter = selectedFilter)
+        // TODO: 選択した条件に合致するイベントを取得してuiStateを更新する
+        start = 1
     }
 
     fun onFavoriteButtonClick(

@@ -10,4 +10,5 @@
     <string name="empty_favorites_not_found_details">When you find a favorite event \nin the Events screen \nTry tapping the heart icon</string>
     <string name="error_dialog_title">Error</string>
     <string name="error_dialog_button">OK</string>
+    <string name="filter_chip_online">online events</string>
 </resources>

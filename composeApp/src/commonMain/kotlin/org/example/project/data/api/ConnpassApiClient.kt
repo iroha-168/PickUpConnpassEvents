@@ -22,6 +22,7 @@ class ConnpassApiClient {
     }
 
     suspend fun getEvents(
+        filter: ConnpassQueryFilter?,
         start: Int,
         count: Int,
     ): EventResponse {
@@ -37,9 +38,21 @@ class ConnpassApiClient {
                 parameters.append("keyword_or", "swift")
                 parameters.append("start", start.toString())
                 parameters.append("count", count.toString())
-                parameters.append("order", "2")
+                when (filter) {
+                    is ConnpassQueryFilter.Prefecture -> parameters.append("prefecture", filter.value)
+                    is ConnpassQueryFilter.Order -> parameters.append("order", filter.value)
+                    null -> { /* do nothing */ }
+                }
             }
         }.body()
+    }
+
+    sealed class ConnpassQueryFilter {
+        data class Prefecture(val value: String): ConnpassQueryFilter()
+        sealed class Order(val value: String): ConnpassQueryFilter() {
+            data object UpcomingEvents: Order("2")
+            data object Newest: Order("3")
+        }
     }
 
     companion object {

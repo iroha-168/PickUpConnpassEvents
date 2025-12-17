@@ -2,13 +2,35 @@ package org.example.project.ui.event
 
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDateTime
+import org.example.project.data.api.ConnpassApiClient
 import org.example.project.data.db.EventDto
 
 data class EventUiState(
     val isRefreshing: Boolean = false,
+    val filter: EventFilter = EventFilter.UpcomingEvents,
     val events: List<EventItemUiState>? = null,
     val uiEvents: List<EventUiEvent> = emptyList(),
 )
+sealed class EventFilter {
+    abstract fun toQuery(): ConnpassApiClient.ConnpassQueryFilter
+
+    data object Online: EventFilter() {
+        override fun toQuery(): ConnpassApiClient.ConnpassQueryFilter {
+            return ConnpassApiClient.ConnpassQueryFilter.Prefecture("online")
+        }
+    }
+    data object Newest: EventFilter() {
+        override fun toQuery(): ConnpassApiClient.ConnpassQueryFilter {
+            return ConnpassApiClient.ConnpassQueryFilter.Order.Newest
+        }
+    }
+
+    data object UpcomingEvents: EventFilter() {
+        override fun toQuery(): ConnpassApiClient.ConnpassQueryFilter {
+            return ConnpassApiClient.ConnpassQueryFilter.Order.UpcomingEvents
+        }
+    }
+}
 
 data class EventItemUiState(
     val event: EventDto,
