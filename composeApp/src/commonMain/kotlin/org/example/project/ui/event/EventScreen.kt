@@ -56,7 +56,7 @@ fun EventScreen(
             .padding(horizontal = 8.dp),
         isRefreshing = uiState.isRefreshing,
         onRefresh = {
-            viewModel.refresh()
+            viewModel.refresh(selectedFilter)
         }
     ) {
         if(uiState.events == null) {
@@ -75,7 +75,7 @@ fun EventScreen(
                 EventList(
                     uiState = uiState,
                     lastIndex = viewModel.page - 1,
-                    refresh = viewModel::refresh,
+                    refresh = { viewModel.refresh(selectedFilter) },
                     onFavoriteButtonClick = viewModel::onFavoriteButtonClick,
                     onEventCardClick = viewModel::onEventClick,
                 )
