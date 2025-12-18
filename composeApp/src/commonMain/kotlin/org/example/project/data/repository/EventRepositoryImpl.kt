@@ -1,5 +1,6 @@
 package org.example.project.data.repository
 
+import kotlinx.coroutines.flow.Flow
 import org.example.project.data.api.ConnpassApiClient
 import org.example.project.data.api.ConnpassApiClient.ConnpassQueryFilter
 import org.example.project.data.db.EventDao
@@ -11,6 +12,7 @@ class EventRepositoryImpl(
 ): EventRepository {
     override val events = eventDao.getAll()
     override val favoriteEvents = eventDao.getFavoriteEvents()
+    override val onlineEvents: Flow<List<EventDto>> = eventDao.getOnlineEvents()
 
     override suspend fun refresh(
         start: Int,
@@ -23,13 +25,13 @@ class EventRepositoryImpl(
                 count = page,
                 filter = filter,
             )
-            val events = result.events.map {
+            val events = result.events.map { event ->
                 EventDto(
-                    id = it.id,
-                    title = it.title,
-                    url = it.url,
-                    startedAt = it.startedAt,
-                    place = it.place,
+                    id = event.id,
+                    title = event.title,
+                    url = event.url,
+                    startedAt = event.startedAt,
+                    place = event.place,
                     isFavorite = false
                 )
             }

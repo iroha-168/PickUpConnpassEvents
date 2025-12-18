@@ -7,6 +7,7 @@ import org.example.project.data.db.EventDto
 interface EventRepository {
     val events: Flow<List<EventDto>>
     val favoriteEvents: Flow<List<EventDto>>
+    val onlineEvents: Flow<List<EventDto>>
 
     suspend fun refresh(
         start: Int,

@@ -30,4 +30,7 @@ interface EventDao {
 
     @Query("SELECT * FROM EventDto WHERE isFavorite = 1")
     fun getFavoriteEvents(): Flow<List<EventDto>>
+
+    @Query("SELECT * FROM EventDto WHERE place = 'オンライン'")
+    fun getOnlineEvents(): Flow<List<EventDto>>
 }

@@ -12,15 +12,17 @@ import androidx.sqlite.execSQL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
-private val MIGRATIONS: Array<Migration> = arrayOf(
-    object : Migration(1, 2) {
-        override fun migrate(connection: SQLiteConnection) {
-            connection.execSQL(
-                "ALTER TABLE `EventDto` ADD COLUMN `url` TEXT NOT NULL DEFAULT ''"
-            )
-        }
-    }
-)
+private val MIGRATIONS: Array<Migration> = arrayOf()
+
+//private val MIGRATIONS: Array<Migration> = arrayOf(
+//    object : Migration(2, 3) {
+//        override fun migrate(connection: SQLiteConnection) {
+//            connection.execSQL(
+//                "ALTER TABLE `EventDto` ADD COLUMN `address` TEXT"
+//            )
+//        }
+//    }
+//)
 
 @Database(entities = [EventDto::class], version = 2)
 @ConstructedBy(EventDatabaseConstructor::class)
@@ -39,6 +41,8 @@ fun getRoomDatabase(
 ): EventDatabase {
     return builder
         .addMigrations(*MIGRATIONS)
+        // FIXME: マイグレーションが見つからない場合既存のDBを破棄して新規作成し直す。本番環境ではよくないのでリリースする場合は削除する
+//        .fallbackToDestructiveMigration(dropAllTables = true)
         .setDriver(BundledSQLiteDriver())
         .setQueryCoroutineContext(Dispatchers.IO)
         .build()

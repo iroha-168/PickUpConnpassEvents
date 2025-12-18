@@ -53,9 +53,18 @@ class EventViewModel(
 
     fun onFilterChange(selectedFilter: EventFilter) {
         _uiState.update { it.copy(filter = selectedFilter) }
-        // 選択した条件でテーブル更新
         refresh(filter = selectedFilter)
-        // TODO: 選択した条件に合致するイベントを取得してuiStateを更新する
+        when(selectedFilter) {
+            is EventFilter.Online -> {
+                getOnlineEvents()
+            }
+            is EventFilter.Newest -> {
+                // TODO: 後で実装する
+            }
+            is EventFilter.UpcomingEvents -> {
+                // TODO: 後で実装する
+            }
+        }
         start = 1
     }
 
@@ -82,5 +91,19 @@ class EventViewModel(
 
     private fun setRefreshingState(state: Boolean) {
         _uiState.update { it.copy(isRefreshing = state) }
+    }
+
+    private fun getOnlineEvents() {
+        viewModelScope.launch {
+            eventRepository.onlineEvents.collect { events ->
+                _uiState.update {
+                    it.copy(
+                        events = events.map { event ->
+                            EventItemUiState(event)
+                        }
+                    )
+                }
+            }
+        }
     }
 }
