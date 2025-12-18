@@ -13,6 +13,7 @@ class EventRepositoryImpl(
     override val events = eventDao.getAll()
     override val favoriteEvents = eventDao.getFavoriteEvents()
     override val onlineEvents: Flow<List<EventDto>> = eventDao.getOnlineEvents()
+    override val newestEvents: Flow<List<EventDto>> = eventDao.getNewestEvents()
 
     override suspend fun refresh(
         start: Int,

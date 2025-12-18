@@ -59,7 +59,7 @@ class EventViewModel(
                 getOnlineEvents()
             }
             is EventFilter.Newest -> {
-                // TODO: 後で実装する
+                getNewestEvents()
             }
             is EventFilter.UpcomingEvents -> {
                 // TODO: 後で実装する
@@ -96,6 +96,20 @@ class EventViewModel(
     private fun getOnlineEvents() {
         viewModelScope.launch {
             eventRepository.onlineEvents.collect { events ->
+                _uiState.update {
+                    it.copy(
+                        events = events.map { event ->
+                            EventItemUiState(event)
+                        }
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getNewestEvents() {
+        viewModelScope.launch {
+            eventRepository.newestEvents.collect { events ->
                 _uiState.update {
                     it.copy(
                         events = events.map { event ->

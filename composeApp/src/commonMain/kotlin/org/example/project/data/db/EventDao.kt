@@ -33,4 +33,7 @@ interface EventDao {
 
     @Query("SELECT * FROM EventDto WHERE place = 'オンライン'")
     fun getOnlineEvents(): Flow<List<EventDto>>
+
+    @Query("SELECT * FROM EventDto ORDER BY id DESC")
+    fun getNewestEvents(): Flow<List<EventDto>>
 }

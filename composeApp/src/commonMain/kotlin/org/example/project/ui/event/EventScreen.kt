@@ -1,8 +1,11 @@
 package org.example.project.ui.event
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
@@ -13,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.example.project.ui.event.section.ErrorDialog
@@ -20,6 +24,7 @@ import org.example.project.ui.event.section.EventList
 import org.example.project.ui.event.section.NoEvents
 import org.jetbrains.compose.resources.stringResource
 import pickupconnpassevents.composeapp.generated.resources.Res
+import pickupconnpassevents.composeapp.generated.resources.filter_chip_newest
 import pickupconnpassevents.composeapp.generated.resources.filter_chip_online
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -63,15 +68,25 @@ fun EventScreen(
             NoEvents()
         } else {
             Column {
-                FilterChip(
-                    selected = selectedFilter == EventFilter.Online,
-                    onClick = {
-                        selectedFilter = EventFilter.Online
-                        viewModel.onFilterChange(selectedFilter)
-                    },
-                    label = { Text(text = stringResource(Res.string.filter_chip_online)) },
-                )
-
+                Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                    FilterChip(
+                        selected = selectedFilter == EventFilter.Online,
+                        onClick = {
+                            selectedFilter = EventFilter.Online
+                            viewModel.onFilterChange(selectedFilter)
+                        },
+                        label = { Text(text = stringResource(Res.string.filter_chip_online)) },
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    FilterChip(
+                        selected = selectedFilter == EventFilter.Newest,
+                        onClick = {
+                            selectedFilter = EventFilter.Newest
+                            viewModel.onFilterChange(selectedFilter)
+                        },
+                        label = { Text(text = stringResource(Res.string.filter_chip_newest)) },
+                    )
+                }
                 EventList(
                     uiState = uiState,
                     lastIndex = viewModel.page - 1,
