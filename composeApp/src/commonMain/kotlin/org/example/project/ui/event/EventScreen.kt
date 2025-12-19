@@ -26,6 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 import pickupconnpassevents.composeapp.generated.resources.Res
 import pickupconnpassevents.composeapp.generated.resources.filter_chip_newest
 import pickupconnpassevents.composeapp.generated.resources.filter_chip_online
+import pickupconnpassevents.composeapp.generated.resources.filter_chip_upcoming
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -77,7 +78,9 @@ fun EventScreen(
                         },
                         label = { Text(text = stringResource(Res.string.filter_chip_online)) },
                     )
+
                     Spacer(modifier = Modifier.width(8.dp))
+
                     FilterChip(
                         selected = selectedFilter == EventFilter.Newest,
                         onClick = {
@@ -85,6 +88,17 @@ fun EventScreen(
                             viewModel.onFilterChange(selectedFilter)
                         },
                         label = { Text(text = stringResource(Res.string.filter_chip_newest)) },
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    FilterChip(
+                        selected = selectedFilter == EventFilter.UpcomingEvents,
+                        onClick = {
+                            selectedFilter = EventFilter.UpcomingEvents
+                            viewModel.onFilterChange(selectedFilter)
+                        },
+                        label = { Text(text = stringResource(Res.string.filter_chip_upcoming)) },
                     )
                 }
                 EventList(

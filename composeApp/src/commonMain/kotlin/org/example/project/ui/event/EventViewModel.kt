@@ -16,20 +16,12 @@ class EventViewModel(
     var start = 1
     val page = 20
 
-    private val _uiState = MutableStateFlow(EventUiState()).also { uiState ->
-        viewModelScope.launch {
-            eventRepository.events.collect { events ->
-                val itemUiState = events.map { event ->
-                    EventItemUiState(event)
-                }
-                uiState.update { it.copy(events = itemUiState) }
-            }
-        }
-    }
+    private val _uiState = MutableStateFlow(EventUiState())
     val uiState: StateFlow<EventUiState> = _uiState
 
     init {
-        refresh(EventFilter.UpcomingEvents)
+//        refresh(EventFilter.UpcomingEvents)
+        onFilterChange(EventFilter.UpcomingEvents)
     }
 
     fun refresh(filter: EventFilter) {
@@ -54,15 +46,20 @@ class EventViewModel(
     fun onFilterChange(selectedFilter: EventFilter) {
         _uiState.update { it.copy(filter = selectedFilter) }
         refresh(filter = selectedFilter)
-        when(selectedFilter) {
-            is EventFilter.Online -> {
-                getOnlineEvents()
-            }
-            is EventFilter.Newest -> {
-                getNewestEvents()
-            }
-            is EventFilter.UpcomingEvents -> {
-                // TODO: 後で実装する
+        val selectedFlow = when(selectedFilter) {
+            is EventFilter.Online -> eventRepository.onlineEvents
+            is EventFilter.Newest -> eventRepository.newestEvents
+            is EventFilter.UpcomingEvents -> eventRepository.upcomingEvents
+        }
+        viewModelScope.launch {
+            selectedFlow.collect { events ->
+                _uiState.update {
+                    it.copy(
+                        events = events.map { event ->
+                            EventItemUiState(event)
+                        }
+                    )
+                }
             }
         }
         start = 1
@@ -91,33 +88,5 @@ class EventViewModel(
 
     private fun setRefreshingState(state: Boolean) {
         _uiState.update { it.copy(isRefreshing = state) }
-    }
-
-    private fun getOnlineEvents() {
-        viewModelScope.launch {
-            eventRepository.onlineEvents.collect { events ->
-                _uiState.update {
-                    it.copy(
-                        events = events.map { event ->
-                            EventItemUiState(event)
-                        }
-                    )
-                }
-            }
-        }
-    }
-
-    private fun getNewestEvents() {
-        viewModelScope.launch {
-            eventRepository.newestEvents.collect { events ->
-                _uiState.update {
-                    it.copy(
-                        events = events.map { event ->
-                            EventItemUiState(event)
-                        }
-                    )
-                }
-            }
-        }
     }
 }

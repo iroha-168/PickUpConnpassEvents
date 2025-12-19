@@ -9,6 +9,7 @@ interface EventRepository {
     val favoriteEvents: Flow<List<EventDto>>
     val onlineEvents: Flow<List<EventDto>>
     val newestEvents: Flow<List<EventDto>>
+    val upcomingEvents: Flow<List<EventDto>>
 
     suspend fun refresh(
         start: Int,

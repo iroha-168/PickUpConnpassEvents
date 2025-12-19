@@ -12,4 +12,5 @@
     <string name="error_dialog_button">OK</string>
     <string name="filter_chip_online">Online Events</string>
     <string name="filter_chip_newest">Newest</string>
+    <string name="filter_chip_upcoming">Upcoming</string>
 </resources>
