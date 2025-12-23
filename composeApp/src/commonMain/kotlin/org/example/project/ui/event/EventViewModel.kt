@@ -20,7 +20,6 @@ class EventViewModel(
     val uiState: StateFlow<EventUiState> = _uiState
 
     init {
-//        refresh(EventFilter.UpcomingEvents)
         onFilterChange(EventFilter.UpcomingEvents)
     }
 
