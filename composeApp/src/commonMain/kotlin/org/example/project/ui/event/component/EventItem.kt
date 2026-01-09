@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import org.example.project.ui.component.EventInfoArea
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import theming.AppTheme
 
 @Composable
@@ -50,6 +51,22 @@ fun EventItem(
             isFavorite = isFavorite,
             onClick = onFavoriteButtonClick,
             modifier = Modifier.size(32.dp).weight(1f)
+        )
+    }
+}
+
+@Composable
+@Preview
+private fun EventItemPreview() {
+    AppTheme {
+        EventItem(
+            id = 1,
+            isFavorite = true,
+            title = "イベントタイトル",
+            startedAt = "2026/01/01",
+            place = "オンライン",
+            onFavoriteButtonClick = { _, _ -> },
+            onEventCardClick = {},
         )
     }
 }
