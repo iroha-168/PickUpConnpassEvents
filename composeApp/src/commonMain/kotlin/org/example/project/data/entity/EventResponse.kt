@@ -14,6 +14,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlin.time.ExperimentalTime
 
 @Serializable
 data class EventResponse (
@@ -40,6 +41,7 @@ object LocalDateTimeSerializer : KSerializer<LocalDateTime?> {
         encoder.encodeString(value.toString())
     }
 
+    @OptIn(ExperimentalTime::class)
     override fun deserialize(decoder: Decoder): LocalDateTime? {
         try {
             val instant = Instant.parse(decoder.decodeString())
