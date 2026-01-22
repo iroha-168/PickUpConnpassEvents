@@ -1,17 +1,8 @@
 {
   "extends": ["config:recommended"],
-
   "timezone": "Asia/Tokyo",
-
-  "schedule": ["at any time"],
-
+  "schedule": null,
   "prConcurrentLimit": 3,
-
   "labels": ["dependencies"],
-
-  "commitMessagePrefix": "chore:",
-
-  "onboarding": true,
-
-  "requireConfig": "optional"
+  "commitMessagePrefix": "chore:"
 }
