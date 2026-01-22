@@ -19,10 +19,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import kotlinx.datetime.LocalDateTime
 import org.example.project.data.db.EventDto
-import org.example.project.data.entity.Event
 import org.example.project.ui.event.section.ErrorDialog
 import org.example.project.ui.event.section.EventList
 import org.example.project.ui.event.section.NoEvents
@@ -99,7 +97,11 @@ private fun EventScreen(
             NoEvents()
         } else {
             Column {
-                Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(vertical = 12.dp)
+                ) {
                     FilterChip(
                         selected = selectedFilter == EventFilter.Online,
                         onClick = {

@@ -1,8 +1,12 @@
 package org.example.project
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
@@ -39,7 +43,10 @@ fun App(
         val startDestination = Destination.Events
         var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
 
-        Scaffold(modifier = Modifier.fillMaxSize()) { contentPadding ->
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            contentWindowInsets = WindowInsets.systemBars.only(WindowInsetsSides.Top)
+        ) { contentPadding ->
             Column {
                 PrimaryTabRow(
                     selectedTabIndex = selectedDestination,
