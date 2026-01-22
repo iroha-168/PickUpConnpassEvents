@@ -3,11 +3,15 @@
 
   "timezone": "Asia/Tokyo",
 
-  "schedule": ["every saturday"],
+  "schedule": ["at any time"],
 
   "prConcurrentLimit": 3,
 
   "labels": ["dependencies"],
 
-  "commitMessagePrefix": "chore:"
+  "commitMessagePrefix": "chore:",
+
+  "onboarding": true,
+
+  "requireConfig": "optional"
 }
