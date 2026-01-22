@@ -1,7 +1,7 @@
 {
   "extends": ["config:recommended"],
   "timezone": "Asia/Tokyo",
-  "schedule": null,
+  "schedule": ["every saturday"],
   "prConcurrentLimit": 3,
   "labels": ["dependencies"],
   "commitMessagePrefix": "chore:"
